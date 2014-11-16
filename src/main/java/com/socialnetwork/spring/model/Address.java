@@ -1,6 +1,7 @@
 package com.socialnetwork.spring.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,19 +9,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Entity
-@Table(name="ADDRESS")
+
+@Embeddable
 public class Address {
 
 
-	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-
+	
+	@Column(name="Street")
 	private String street;
+	
+	@Column(name="City")
 	private String city;
+	
+	@Column(name="State")
 	private String state;
+	
+	@Column(name="Zip")
 	private String zip;
 
 	public String getStreet() {

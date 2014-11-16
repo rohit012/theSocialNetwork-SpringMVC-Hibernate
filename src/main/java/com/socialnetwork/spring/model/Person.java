@@ -3,16 +3,22 @@ package com.socialnetwork.spring.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  * Entity bean with JPA annotations
  * Hibernate provides JPA implementation
- * @author pankaj
+ * @author rohit
  *
  */
 @Entity
@@ -28,13 +34,28 @@ public class Person {
 	
 	private String country;
 	
+	@Column(name = "FirstName", unique = false, nullable = false, length = 10)
 	private String firstname;
+	
+	@Column(name = "LastName", unique = false, nullable = false, length = 10)
     private String lastname;
+	
+	 @Column(name = "Email", unique = true, nullable = false, length = 20)
     private String email;
+	 
+	@Column(name = "Description", unique = false, nullable = true, length = 20)
     private String description;
-//    private Address address;
-//    private Organization org;
- //   private List<Person> friends;
+	
+	@Embedded
+    private Address address;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="Org_Id")
+    private Organization org;
+	
+	/*@OneToMany
+    @JoinTable(name="Person_Friendship", joinColumns = @JoinColumn(name="Person_ID"), inverseJoinColumns = @JoinColumn(name="Friend_ID"))
+    private List<Person> friends;*/
 
 
 	public int getId() {
@@ -73,4 +94,52 @@ public class Person {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Organization getOrg() {
+		return org;
+	}
+
+	public void setOrg(Organization org) {
+		this.org = org;
+	}
+
+/*	public List<Person> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<Person> friends) {
+		this.friends = friends;
+	}*/
 }
