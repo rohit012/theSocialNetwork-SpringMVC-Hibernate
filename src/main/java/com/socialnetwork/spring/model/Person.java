@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,6 +32,22 @@ public class Person implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	public Organization getOrg() {
+		return org;
+	}
+
+	public void setOrg(Organization org) {
+		this.org = org;
+	}
+
+	public Set<Person> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(Set<Person> friends) {
+		this.friends = friends;
+	}
+
 	private String name;
 	
 	private String country;
@@ -64,7 +79,7 @@ public class Person implements Serializable{
 	    @JoinTable(name="PERSON_FRIEND",
 	        joinColumns={@JoinColumn(name="Person_Id")},
 	        inverseJoinColumns={@JoinColumn(name="Friend_Id")})
-	    private Set<Person> colleagues = new HashSet<Person>();
+	    private Set<Person> friends = new HashSet<Person>();
 /*
 	    @ManyToMany(mappedBy="Friends")
 	    private Set<Person> teammates = new HashSet<Person>();
@@ -138,20 +153,5 @@ public class Person implements Serializable{
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-/*
-	public Organization getOrg() {
-		return org;
-	}
 
-	public void setOrg(Organization org) {
-		this.org = org;
-	}
-*/
-/*	public List<Person> getFriends() {
-		return friends;
-	}
-
-	public void setFriends(List<Person> friends) {
-		this.friends = friends;
-	}*/
 }

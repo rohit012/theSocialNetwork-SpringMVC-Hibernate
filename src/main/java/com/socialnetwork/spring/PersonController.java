@@ -80,9 +80,9 @@ public class PersonController {
 		
 		HashMap<String, Object> responseMap = new HashMap<String, Object>();
 		
-		if(bodyRequest.getEmail()==null||bodyRequest.getEmail()==""||
-				bodyRequest.getLastname()==null||bodyRequest.getLastname()==""||
-				bodyRequest.getFirstname()==null||bodyRequest.getFirstname()==""){
+		if(bodyRequest.getPerson().getEmail()==null||bodyRequest.getPerson().getEmail()==""||
+				bodyRequest.getPerson().getLastname()==null||bodyRequest.getPerson().getLastname()==""||
+				bodyRequest.getPerson().getFirstname()==null||bodyRequest.getPerson().getFirstname()==""){
 			
 			responseMap.put("errorCode", 400);
 			responseMap.put("errorMsg", "invalid parameters");

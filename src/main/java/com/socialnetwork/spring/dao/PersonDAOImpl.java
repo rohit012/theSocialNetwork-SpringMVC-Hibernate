@@ -30,6 +30,7 @@ public class PersonDAOImpl implements PersonDAO {
 		session.save(p);
 		System.out.println(p.getId());
 		System.out.println(p);
+		session.close();
 		return p;	
 	}
 
@@ -37,6 +38,7 @@ public class PersonDAOImpl implements PersonDAO {
 	public void updatePerson(Person p) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(p);
+		session.close();
 		logger.info("Person updated successfully, Person Details="+p);
 	}
 
@@ -48,6 +50,7 @@ public class PersonDAOImpl implements PersonDAO {
 		for(Person p : personsList){
 			logger.info("Person List::"+p);
 		}
+		session.close();
 		return personsList;
 	}
 
@@ -56,6 +59,7 @@ public class PersonDAOImpl implements PersonDAO {
 		Session session = this.sessionFactory.getCurrentSession();		
 		Person p = (Person) session.load(Person.class, new Integer(id));
 		logger.info("Person loaded successfully, Person details="+p);
+		session.close();
 		return p;
 	}
 
@@ -66,6 +70,7 @@ public class PersonDAOImpl implements PersonDAO {
 		if(null != p){
 			session.delete(p);
 		}
+		session.close();
 		logger.info("Person deleted successfully, person details="+p);
 	}
 

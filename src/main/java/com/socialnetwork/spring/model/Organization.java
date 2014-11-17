@@ -1,5 +1,7 @@
 package com.socialnetwork.spring.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,8 +14,12 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="ORGANIZATION",uniqueConstraints=@UniqueConstraint(columnNames={"Org_Id"}))
-public class Organization {
+public class Organization implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private long id;
     private String name;
     private String description;
@@ -23,7 +29,7 @@ public class Organization {
 	
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="Org_Id",unique=true,nullable=false)
+    @Column(name="Org_Id")
     public long getId() {
 		return id;
 	}

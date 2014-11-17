@@ -1,5 +1,7 @@
 package com.socialnetwork.spring.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -11,10 +13,15 @@ import javax.persistence.Table;
 
 
 @Embeddable
-public class Address {
+public class Address implements Serializable {
 
 
 	
+	/**
+	 * 
+	 */
+	public static final long serialVersionUID = 1L;
+
 	@Column(name="Street")
 	private String street;
 	

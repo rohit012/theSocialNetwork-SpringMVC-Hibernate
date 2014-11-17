@@ -1,10 +1,11 @@
-package com.socialnetwork.spring.dao;
+package com.socialnetwork.spring.service;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.socialnetwork.spring.model.Organization;
 
-public interface OrganizationDao {
+@Service
+public interface OrganizationService {
 
 	public Organization addOrg(Organization p);
 
