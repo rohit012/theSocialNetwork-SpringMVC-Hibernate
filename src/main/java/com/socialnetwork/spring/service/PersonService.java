@@ -6,7 +6,7 @@ import com.socialnetwork.spring.model.Person;
 
 public interface PersonService {
 
-	public void addPerson(Person p);
+	public Person addPerson(Person p);
 
 	public void updatePerson(Person p);
 
@@ -17,5 +17,8 @@ public interface PersonService {
 	public void removePerson(int id);
 	
 	public Person getPersonByEmail(Person p);
+	
+	public String getPersonByEmail2(Person p);
+
 
 }

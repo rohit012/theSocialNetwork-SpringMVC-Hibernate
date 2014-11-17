@@ -80,12 +80,31 @@ public class PersonController {
 		
 		HashMap<String, Object> responseMap = new HashMap<String, Object>();
 		
-		Person inputPerson=new Person();
+		if(bodyRequest.getEmail()==null||bodyRequest.getEmail()==""||
+				bodyRequest.getLastname()==null||bodyRequest.getLastname()==""||
+				bodyRequest.getFirstname()==null||bodyRequest.getFirstname()==""){
+			
+			responseMap.put("errorCode", 400);
+			responseMap.put("errorMsg", "invalid parameters");
+			return responseMap;
+		}
 		
-		Person person =personService.getPersonByEmail(inputPerson);
+		Person inputPerson=bodyRequest.getPerson();
+		System.out.println("got user "+inputPerson.getFirstname());
 		
-		System.out.println("the person is "+bodyRequest.getFirstname());
-		responseMap.put("User", bodyRequest);
+		
+		String personEmailId = personService.getPersonByEmail2(inputPerson);
+		
+		System.out.println("person saved");
+		
+		Person savedPerson=null;
+		if(personEmailId==null){
+		
+			System.out.println("person doesnot exist");
+			savedPerson=personService.addPerson(inputPerson);
+		
+			responseMap.put("savedUser", savedPerson);
+		}
 		
 		return responseMap;
 		

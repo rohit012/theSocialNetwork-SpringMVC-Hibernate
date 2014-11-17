@@ -1,5 +1,6 @@
 package com.socialnetwork.spring.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="PERSON")
-public class Person {
+public class Person implements Serializable{
 
 	@Id
 	@Column(name="Person_Id")

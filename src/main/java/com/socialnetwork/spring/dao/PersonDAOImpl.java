@@ -2,6 +2,7 @@ package com.socialnetwork.spring.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -22,10 +23,14 @@ public class PersonDAOImpl implements PersonDAO {
 	}
 
 	@Override
-	public void addPerson(Person p) {
+	public Person addPerson(Person p) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(p);
-		logger.info("Person saved successfully, Person Details="+p);
+		System.out.println("Person saved successfully, Person Details="+p);
+		 
+		session.save(p);
+		System.out.println(p.getId());
+		System.out.println(p);
+		return p;	
 	}
 
 	@Override
@@ -77,5 +82,34 @@ public class PersonDAOImpl implements PersonDAO {
             return null;
         
     }
+
+	@Override
+	public String getPersonByEmail2(Person p) {
+  //      Session session = this.sessionFactory.getCurrentSession();     
+        Session session = this.sessionFactory.openSession();        
+
+
+		String hql="SELECT E.email from Person E where E.email=:email";
+		Query query= session.createQuery(hql);
+		query.setParameter("email",p.getEmail() );
+		
+		List list=query.list();
+		
+		String emailId=null;
+		
+		for(Object obj:list){
+			if(obj!=null){
+				emailId=(String)obj;
+				break;
+			}
+		}
+		
+		System.out.println("values returned"+emailId);
+		
+		
+		return emailId; 
+		
+		
+	}
 	
 }

@@ -3,6 +3,8 @@ package com.socialnetwork.spring.model;
 
 public class BodyRequest {
 
+	private Person person;
+	
 	private String firstname;
 	
     private String lastname;
@@ -41,6 +43,14 @@ public class BodyRequest {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 	
 

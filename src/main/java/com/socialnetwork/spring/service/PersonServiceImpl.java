@@ -19,8 +19,10 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	@Transactional
-	public void addPerson(Person p) {
-		this.personDAO.addPerson(p);
+	public Person addPerson(Person p) {
+		Person savedPerson= this.personDAO.addPerson(p);
+		
+		return savedPerson;
 	}
 
 	@Override
@@ -52,5 +54,11 @@ public class PersonServiceImpl implements PersonService {
     public Person getPersonByEmail(Person p) {
         return this.personDAO.getPersonByEmail(p);
     }
+
+	@Override
+	public String getPersonByEmail2(Person p) {
+		return this.personDAO.getPersonByEmail2(p);
+		 
+	}
 
 }
