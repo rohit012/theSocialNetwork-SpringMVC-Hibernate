@@ -13,5 +13,6 @@ public interface OrganizationService {
 	
 	public Organization getOrgById(Long id);
 
-	public void removeOrg(int id);
+	public void removeOrg(Long id);
+	
 }

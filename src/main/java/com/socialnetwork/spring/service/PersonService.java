@@ -20,5 +20,7 @@ public interface PersonService {
 	
 	public String getPersonByEmail2(Person p);
 
+	public boolean addFriend(long id1,long id2);
+	public boolean removeFriend(long id1,long id2);
 
 }

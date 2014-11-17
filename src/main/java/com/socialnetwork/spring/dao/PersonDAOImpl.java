@@ -117,4 +117,75 @@ public class PersonDAOImpl implements PersonDAO {
 		
 	}
 	
+	@Override
+	public boolean addFriend(long id1, long id2) {
+	// TODO Auto-generated method stub
+	Session session=this.sessionFactory.openSession();
+	int i;
+	String hql="select E.Friend_ID from PERSON_FRIEND E where E.Person_ID=id1";
+	Query query=session.createQuery(hql);
+	List list=query.list();
+
+	for(i=0;i<list.size();i++){
+	if (id2==((Long)list.get(i)).longValue()){
+	return false;
+	}
+	}
+
+	Person p1,p2;
+	Query q=session.createQuery("from Person as E where E.id=id1");
+	List l1=q.list();
+
+	Query q2=session.createQuery("from Person as E where E.id=id2");
+	List l2=q2.list();
+
+	p1=(Person)(l1.get(0));
+	p2=(Person)(l2.get(0));
+
+	p1.getFriends().add(p2);
+
+	session.save(p1);
+	return true;
+	}
+
+	@Override
+	public boolean removeFriend(long id1, long id2) {
+	// TODO Auto-generated method stub
+	Session session=this.sessionFactory.openSession();
+	int i;
+	String hql="select E.Friend_ID from PERSON_FRIEND E where E.Person_ID=id1";
+	Query query=session.createQuery(hql);
+	List list=query.list();
+
+	int flag=0;
+	for(i=0;i<list.size();i++){
+	if (id2==((Long)list.get(i)).longValue()){
+	flag=1;
+	}
+	}
+
+	if (flag!=1){
+	return false;
+	}
+	else
+	{
+	Person p1,p2;
+	Query q=session.createQuery("from Person as E where E.id=id1");
+	List l1=q.list();
+
+	Query q2=session.createQuery("from Person as E where E.id=id2");
+	List l2=q2.list();
+
+	p1=(Person)(l1.get(0));
+	p2=(Person)(l2.get(0));
+
+	p1.getFriends().remove(p2);
+
+	session.save(p1);
+	return true;
+	}
+
+	}
+	
+	
 }

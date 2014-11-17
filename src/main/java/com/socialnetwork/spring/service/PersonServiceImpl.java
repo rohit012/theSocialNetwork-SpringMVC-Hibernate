@@ -60,5 +60,16 @@ public class PersonServiceImpl implements PersonService {
 		return this.personDAO.getPersonByEmail2(p);
 		 
 	}
+	
+	@Override
+	public boolean addFriend(long id1, long id2) {
+
+	return this.personDAO.addFriend(id1, id2);
+	}
+
+	@Override
+	public boolean removeFriend(long id1, long id2) {
+	return this.removeFriend(id1, id2);
+	}
 
 }

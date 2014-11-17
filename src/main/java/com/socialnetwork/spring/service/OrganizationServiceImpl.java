@@ -40,7 +40,7 @@ private OrganizationDao orgDAO;
 	}
 
 	@Override
-	public void removeOrg(int id) {
+	public void removeOrg(Long id) {
 		this.orgDAO.removeOrg(id);
 		
 	}
