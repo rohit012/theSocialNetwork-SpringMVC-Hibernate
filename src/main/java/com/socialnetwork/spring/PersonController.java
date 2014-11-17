@@ -1,14 +1,24 @@
 package com.socialnetwork.spring;
 
+import java.awt.PageAttributes.MediaType;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.socialnetwork.spring.model.BodyRequest;
 import com.socialnetwork.spring.model.Person;
 import com.socialnetwork.spring.service.PersonService;
 
@@ -31,7 +41,8 @@ public class PersonController {
 	}
 	
 	//For add and update person both
-	@RequestMapping(value= "/person/add", method = RequestMethod.POST)
+	@RequestMapping(value= "/person/add", method = RequestMethod.POST 
+			)
 	public String addPerson(@ModelAttribute("person") Person p){
 		
 		if(p.getId() == 0){
@@ -60,4 +71,24 @@ public class PersonController {
         return "person";
     }
 	
+    
+	
+    @RequestMapping(value= "/person/addNewPerson", method = RequestMethod.POST)
+	@Consumes("application/json")
+    @Produces("application/json")
+    public  @ResponseBody HashMap<String, Object>  addNewPerson(@ModelAttribute("person") Person p,@RequestBody BodyRequest bodyRequest,HttpServletRequest request){
+		
+		HashMap<String, Object> responseMap = new HashMap<String, Object>();
+		
+		Person inputPerson=new Person();
+		
+		Person person =personService.getPersonByEmail(inputPerson);
+		
+		System.out.println("the person is "+bodyRequest.getFirstname());
+		responseMap.put("User", bodyRequest);
+		
+		return responseMap;
+		
+	}
+    
 }

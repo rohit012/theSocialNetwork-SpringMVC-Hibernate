@@ -46,5 +46,11 @@ public class PersonServiceImpl implements PersonService {
 	public void removePerson(int id) {
 		this.personDAO.removePerson(id);
 	}
+	
+	
+	@Override
+    public Person getPersonByEmail(Person p) {
+        return this.personDAO.getPersonByEmail(p);
+    }
 
 }

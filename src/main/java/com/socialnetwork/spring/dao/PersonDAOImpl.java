@@ -64,4 +64,18 @@ public class PersonDAOImpl implements PersonDAO {
 		logger.info("Person deleted successfully, person details="+p);
 	}
 
+	
+	@Override
+    public Person getPersonByEmail(Person p) {
+        Session session = this.sessionFactory.getCurrentSession();        
+        Person p1 = (Person) session.get(Person.class, p.getEmail() );
+        if(p1 != null){
+            logger.info("Person already exist");
+            return p1;
+        }
+        else
+            return null;
+        
+    }
+	
 }

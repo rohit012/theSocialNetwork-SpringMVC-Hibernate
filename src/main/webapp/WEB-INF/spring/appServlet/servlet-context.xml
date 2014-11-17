@@ -43,6 +43,7 @@
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>com.socialnetwork.spring.model.Person</beans:value>
+				<beans:value>com.socialnetwork.spring.model.Organization</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
